@@ -1,6 +1,7 @@
 # DSA
 this is my first repository.
 <b>
-<br/n>
+<br>
 Author-Manmath
+<br>
 Author-Sakhare
