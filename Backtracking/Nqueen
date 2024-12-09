@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+bool issafe(int **arr,int x,int y,int n)
+{
+    //check vertically each column
+    for(int r=0;r<x;r++)
+    {
+        if(arr[r][y]==1)
+        {
+            return false;
+        }
+    }
+    //check left diagonal
+    int r=x,c=y;
+    while(r>=0 && c>=0)
+    {
+        if(arr[r][c]==1)
+        {
+            return false;
+        }
+        r--;
+        c--;
+    }
+    //check right diagonal
+    r=x,c=y;
+    while(r>=0 && c<n)
+    {
+        if(arr[r][c]==1)
+        {
+            return false;
+        }
+        r--;
+        c++;
+    }
+    return true;
+    
+}
+bool nqueen(int **arr,int x,int n)
+{
+    if(x>=n)
+    {
+        return true;
+    }
+    for(int c=0;c<n;c++)
+    {
+          if(issafe(arr,x,c,n))
+               {
+                 arr[x][c]=1;
+                 if(nqueen(arr,x+1,n))
+                 {
+                     return true;
+                 }
+                 arr[x][c]=0;//backtracking
+               }
+    }
+    return false;
+}
+
+int main() {
+   int n;
+   cin>>n;
+   int **arr=new int*[n];
+   for(int i=0;i<n;i++)
+   {
+       arr[i]=new int[n];
+   }
+   
+   for(int i=0;i<n;i++)
+   {
+       for(int j=0;j<n;j++)
+       {
+           arr[i][j]=0;
+       }
+       cout<<endl;
+   }
+   if(nqueen(arr,0,n))
+   {
+       for(int i=0;i<n;i++)
+   {
+       for(int j=0;j<n;j++)
+       {
+           cout<<arr[i][j];
+       }
+       cout<<endl;
+   }
+   }
+
+
+    return 0;
+}
